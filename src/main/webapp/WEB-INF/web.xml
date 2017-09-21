@@ -9,6 +9,7 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <!-- 登录 -->
   <servlet-mapping>
     <servlet-name>loginAction</servlet-name>
     <url-pattern>/login</url-pattern>
@@ -16,5 +17,14 @@
   <servlet>
     <servlet-name>loginAction</servlet-name>
     <servlet-class>action.LoginAction</servlet-class>
+  </servlet>
+  <!-- 考试查询 -->
+  <servlet-mapping>
+    <servlet-name>SearchAction</servlet-name>
+    <url-pattern>/search</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>SearchAction</servlet-name>
+    <servlet-class>com.zr.action.SearchAction</servlet-class>
   </servlet>
 </web-app>
