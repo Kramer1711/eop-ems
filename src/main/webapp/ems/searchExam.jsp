@@ -15,39 +15,58 @@
 </head>
 <script type="text/javascript">
 	$(function() {
+		//表格
 		$('#tb').datagrid({
 			url : '${pageContext.request.contextPath}/search',
+			title : "考试查询" ,
+			queryParams : {
+				key : $("#searchBox").val()
+			},
 			pageNumber : 1,
 			pageSize : 5,
 			pageList : [ 1, 2 , 3, 5, 10, 15, 20 ],
 			columns : [[
 				{field : 'examId', title : '考试id', width : 100, align : 'center',hidden:true}, 
 				{field : 'examName',title : '考试名',width : 100,align : 'center'}, 
-				{field : 'examTime',title : '考试时间',width : 100,align : 'center'}, 
+				{field : 'examTime',title : '考试时间',width : 300,align : 'center'}, 
 				{field : 'examTotal',title : '总分',width : 100,align : 'center'}, 
-				{field: 'functions', title: '具有功能', width: 400,align:'center'}  
+				{field : 'examState',title : '状态',width : 100,align : 'center'}, 
 			]],
+			ctrlSelect:true,
             singleSelect: true,
             fitColumns: false,  
             border: false,  
 			pagination : true,
 			rownumbers : true,
 			fitColumns : true,
-			onClickRow:function(index,row){
-	        },
-	    	toolbar: [{
-	    		iconCls: 'icon-save',
-	    		text : "保存",
-	    		handler: function(){}	    			
-	    	},'-',{
-	    		iconCls: 'icon-cancel',
-	    		text : "取消",
-	    		handler: function(){alert('取消')}
-	    	}]
+	    	toolbar: '#searchtool',
+	    	footer:'#ft'
+	    });
+		//搜索输入框
+		$("#searchBox").textbox();
+		//搜索按钮
+		$("#searchBtn").linkbutton({
+			url : 'search',
+			iconCls : "icon-search",
+			onClick : function(){
+				//重载表格
+				$('#tb').datagrid("load",{
+					key : $("#searchBox").val()
+				});
+			}
 		});
 	});
 </script>
 <body>
-	<div id='tb'></div>
+    <table id="tb" ></table>
+    <div id="searchtool" style="padding:2px 5px;">
+    	<input id='searchBox'/>
+        <a id="searchBtn" href="#" >Search</a>
+    </div>
+    <div id="ft" style="padding:2px 5px;">
+        <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true"></a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true"></a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true"></a>
+    </div>
 </body>
 </html>
